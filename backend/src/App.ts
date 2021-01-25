@@ -1,11 +1,11 @@
 import * as express from 'express';
 import * as morgan from 'morgan';
 import AppSetting from "./config";
-import { sequelize } from './models/sequelize';
+import db from './models';
 
 const app = express();
 // TODO: 환경에 따라 출력 메시지 수정 필요
-sequelize.sync({ force: false })
+db.sequelize.sync({ force: false })
   .then(() => console.log('local MariaDB Connected'))
   .catch(e => console.error(e));
 
