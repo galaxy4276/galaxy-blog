@@ -11,6 +11,13 @@ const sequelize = new Sequelize(
   password,
   {
     dialect: 'mariadb',
+    timezone: '+09:00',
+    pool: {
+      max: 30,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
   },
 );
 
