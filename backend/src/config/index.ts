@@ -6,10 +6,12 @@ dotenv.config();
  */
 
 interface IAppSetting {
-  NODE_ENV: string;
-  PORT: number;
-  DB_PASSWORD: string;
-  HOST: string;
+  readonly NODE_ENV: string;
+  readonly PORT: number;
+  readonly DB_PASSWORD: string;
+  readonly HOST: string;
+  readonly DB_USER: string;
+  readonly DB_NAME: string;
 }
 
 const AppSetting: IAppSetting = {
@@ -17,6 +19,8 @@ const AppSetting: IAppSetting = {
   DB_PASSWORD: process.env.DB_PASSWORD as string,
   PORT: parseInt(process.env.PORT as string, 10),
   HOST: process.env.HOST as string,
+  DB_USER: process.env.DB_HOST as string,
+  DB_NAME: process.env.DB_NAME as string,
 };
 
 export default AppSetting;
