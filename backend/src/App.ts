@@ -4,6 +4,10 @@ import AppSetting from "./config";
 import db from './models';
 import router from "./routes";
 import {asyncDB} from "./loaders";
+import * as cookieParser from 'cookie-parser';
+import * as session from 'express-session';
+import * as passport from "passport";
+
 const app = express();
 
 /* <<< 외부 미들웨어 적용 부분 >>> */
@@ -20,6 +24,21 @@ if (AppSetting.NODE_ENV === 'development') {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // 중첩 객체 표현 ( qs or query-string )
+app.use(cookieParser(AppSetting.SECRET, {}));
+app.use(session({
+  secret: AppSetting.SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    path: '/',
+    httpOnly: true,
+    secure: false,
+    maxAge: Date.now() + 3600000,
+  }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use(router);
 
