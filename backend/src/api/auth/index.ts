@@ -74,6 +74,7 @@ export const join = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
+  console.log(req.body);
   passport.authenticate('local', (err: Error, user, info) => {
     if (err) { return next(err); }
     // test
