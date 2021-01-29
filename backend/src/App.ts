@@ -7,6 +7,7 @@ import {asyncDB} from "./loaders";
 import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
 import * as passport from "passport";
+import passportConfig from './api/passport';
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+passportConfig();
 
 
 app.use(router);
