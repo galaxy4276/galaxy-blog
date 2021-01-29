@@ -12,6 +12,7 @@ interface IAppSetting {
   readonly HOST: string;
   readonly DB_USER: string;
   readonly DB_NAME: string;
+  readonly SECRET: string;
 }
 
 const AppSetting: IAppSetting = {
@@ -21,6 +22,7 @@ const AppSetting: IAppSetting = {
   HOST: process.env.HOST as string,
   DB_USER: process.env.DB_HOST as string,
   DB_NAME: process.env.DB_NAME as string,
+  SECRET: process.env.SECRET as string,
 };
 
 export default AppSetting;
