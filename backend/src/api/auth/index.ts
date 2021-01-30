@@ -74,12 +74,16 @@ export const join = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export const login = (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.body);
-  passport.authenticate('local', (err: Error, user, info) => {
+  passport.authenticate('local', (err, user: User, info) => {
     if (err) { return next(err); }
     // test
     if (info) console.log('info: ', info);
     user ? console.log(user) : console.log('user 없음.');
-    res.send(user);
+
+    res.json({
+      id: user.id,
+      email: user.email,
+    });
+
   })(req, res, next);
 }
