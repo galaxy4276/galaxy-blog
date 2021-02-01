@@ -8,7 +8,7 @@ import Post from './post';
 import sequelize from "./sequelize";
 import {dbType} from "./index";
 
-class User extends Model {
+export class User extends Model {
   public readonly id!: number;
   public nickname!: string;
   public password!: string;
@@ -25,7 +25,6 @@ class User extends Model {
       sourceKey: 'id',
     });
   }
-
 }
 
 User.init({
