@@ -4,6 +4,7 @@ import Post from "../../models/post";
 import * as Joi from 'joi';
 import * as passport from 'passport';
 import {genSaltAndPassword} from "../../loaders";
+import AppSetting from "../../config";
 
 
 export const findUserPosts = async (req: Request, res: Response, next: NextFunction) => {
@@ -78,10 +79,19 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
     if (err) { return next(err); }
     // test
     if (info) console.log('info: ', info);
-    user ? console.log(user) : console.log('user 없음.');
 
-    res.json({
-      id: user.id,
+    if (!user) {
+      if (AppSetting.NODE_ENV === 'development')
+        console.log('유저가 없습니다.');
+      return next(new Error('유저가 존재하지 않음'));
+    }
+
+    req.login(user, err => {
+      if (err) return next(err);
+    });
+
+    return res.json({
+      nickname: user.nickname,
       email: user.email,
     });
 
