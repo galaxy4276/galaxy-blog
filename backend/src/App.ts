@@ -27,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true })); // 중첩 객체 표현 ( qs or query-string )
 app.use(cookieParser(AppSetting.SECRET, {}));
 app.use(session({
+  name: 'cookie',
   secret: AppSetting.SECRET,
   resave: false,
   saveUninitialized: true,
