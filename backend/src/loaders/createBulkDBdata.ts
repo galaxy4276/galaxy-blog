@@ -41,14 +41,10 @@ const createBulkTagData = async () => {
 }
 
 async function asyncDB() {
-  try {
-    await db.sequelize.sync({ force: true });
-    await createBulkUserData();
-    await createBulkPostData();
-    await createBulkTagData();
-  } catch (e) {
-    console.error(e);
-  }
+  await db.sequelize.sync({ force: true });
+  await createBulkUserData();
+  await createBulkPostData();
+  await createBulkTagData();
 }
 
 export default asyncDB;
