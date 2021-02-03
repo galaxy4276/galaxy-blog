@@ -97,3 +97,12 @@ export const login = (req: Request, res: Response, next: NextFunction) => {
 
   })(req, res, next);
 }
+
+export const logout = (req: Request, res: Response, _next: NextFunction) => {
+  if (req.isAuthenticated()) {
+    req.logout();
+  } else {
+    return res.status(400).send();
+  }
+  return res.status(200).send();
+};
